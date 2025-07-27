@@ -1,17 +1,18 @@
 # NOx Conversion Efficiency Prediction System
 
-ðŸ­ **Advanced Machine Learning System for SCR (Selective Catalytic Reduction) Performance Prediction**
+**Advanced Machine Learning System for SCR (Selective Catalytic Reduction) Performance Prediction**
 
 This project provides an end-to-end solution for predicting NOx conversion efficiency in diesel engine aftertreatment systems using machine learning.
 
-## ðŸ“Š Dataset Overview
+## Dataset Overview
 
 - **35 Features**: Complete engine, emissions, and environmental parameters
 - **5,000 Samples**: Realistic synthetic data based on actual engine data
 - **Target**: NOx Conversion Efficiency (%) prediction
 - **Key Features**: Engine speed, torque, SCR temperatures, DEF injection rates, NOx concentrations
+- **Data Location**: `data/sample_data.xlsx`
 
-## ðŸš€ Quick Start
+## Quick Start
 
 ### 1. Setup Environment
 ```bash
@@ -25,40 +26,40 @@ pip install -r requirements.txt
 
 ### 2. Train the Model
 ```bash
-python train_model.py
+python src/train_model.py
 ```
 **Expected output:**
 - Training time: 30-60 seconds
-- RÂ² Score: >0.90 (excellent performance)
+- R^2 Score: >0.90 (excellent performance)
 - Model artifacts saved to `models/` directory
 
 ### 3. Launch GUI Predictor
 ```bash
-python gui.py
+python src/gui.py
 ```
 
-## ðŸ’» GUI Features
+## GUI Features
 
-### ðŸŽ¯ **Simplified Input Interface**
+### **Simplified Input Interface**
 The GUI only asks for **8 most important parameters** instead of all 35:
 
 1. **NOx Inlet Concentration (ppm)** - Measurable upstream NOx
 2. **Engine Speed (RPM)** - Primary operating point
 3. **Engine Torque (Nm)** - Load indicator
-4. **SCR Bed Temperature (Â°C)** - Critical for catalyst performance
+4. **SCR Bed Temperature (°C)** - Critical for catalyst performance
 5. **DEF Injection Rate (L/min)** - Controllable urea dosing
 6. **Exhaust Flow Rate (kg/h)** - System flow parameter
-7. **DOC Inlet Temperature (Â°C)** - Upstream temperature
-8. **Ambient Air Temperature (Â°C)** - Environmental condition
+7. **DOC Inlet Temperature (°C)** - Upstream temperature
+8. **Ambient Air Temperature (°C)** - Environmental condition
 
-### ðŸ” **Smart Features**
+### **Smart Features**
 - **Input Validation**: Real-time range checking
 - **Default Values**: Load typical operating conditions
 - **Confidence Scoring**: Prediction reliability assessment
 - **Performance Categories**: Excellent/Good/Fair/Poor classification
 - **Recommendations**: Actionable suggestions for optimization
 
-## ðŸ“ˆ Model Performance
+## Model Performance
 
 ### **Feature Importance Analysis**
 Based on comprehensive analysis of 35 features:
@@ -67,34 +68,36 @@ Based on comprehensive analysis of 35 features:
 - **Cross-Validation**: 5-fold CV for robust evaluation
 
 ### **Expected Performance**
-- **RÂ² Score**: 0.85-0.95 (production-ready)
+- **R^2 Score**: 0.85-0.95 (production-ready)
 - **RMSE**: <3% of typical NOx conversion values
 - **Prediction Time**: <100ms per sample
 
-## ðŸ”§ File Structure
+## File Structure
 
 ```
 nox-prediction-system/
-â”‚
-â”œâ”€â”€ nox_data.xlsx           # Dataset (5,000 samples, 35 features)
-â”œâ”€â”€ train_model.py          # Model training pipeline
-â”œâ”€â”€ predictor.py            # Prediction engine
-â”œâ”€â”€ gui.py                  # User-friendly GUI
-â”œâ”€â”€ requirements.txt        # Python dependencies
-â”œâ”€â”€ README.md              # This file
-â”‚
-â””â”€â”€ models/                 # Generated after training
-    â”œâ”€â”€ nox_model.pkl      # Trained RandomForest model
-    â”œâ”€â”€ feature_scaler.pkl # Feature scaling parameters
-    â”œâ”€â”€ feature_list.json  # Selected feature names
-    â””â”€â”€ feature_importance.csv # Feature importance analysis
+|
++--- data/
+    +--- sample_data.xlsx # Dataset (5,000 samples, 35 features)
++--- requirements.txt        # Python dependencies
++--- README.md              # This file
++--- src/
+    +--- train_model.py          # Model training pipeline
+    +--- predictor.py            # Prediction engine
+    +--- gui.py                  # User-friendly GUI
+|
++--- models/                 # Generated after training
+    +--- nox_model.pkl      # Trained RandomForest model
+    +--- feature_scaler.pkl # Feature scaling parameters
+    +--- feature_list.json  # Selected feature names
+    +--- feature_importance.csv # Feature importance analysis
 ```
 
-## ðŸ§ª Usage Examples
+## Usage Examples
 
 ### **Command Line Testing**
 ```python
-from predictor import predict_nox_efficiency
+from src.predictor import predict_nox_efficiency
 
 # Test case: Highway cruising conditions
 test_inputs = {
@@ -116,10 +119,10 @@ print(f"Category: {result['category']}")
 ### **Batch Prediction**
 ```python
 import pandas as pd
-from predictor import predict_nox_efficiency
+from src.predictor import predict_nox_efficiency
 
 # Load your data
-df = pd.read_excel('your_test_data.xlsx')
+df = pd.read_excel('data/sample_data.xlsx') # Using sample data for demonstration
 
 # Make predictions
 predictions = []
@@ -131,7 +134,7 @@ for _, row in df.iterrows():
 df['Predicted_NOx_CE'] = predictions
 ```
 
-## ðŸ”¬ Technical Details
+## Technical Details
 
 ### **Machine Learning Pipeline**
 1. **Data Engineering**: Physics-based feature creation
@@ -159,7 +162,7 @@ RandomForestRegressor(
 )
 ```
 
-## âš¡ Performance Optimization
+## Performance Optimization
 
 ### **For Large Datasets**
 - Increase `n_estimators` in `train_model.py`
@@ -171,17 +174,17 @@ RandomForestRegressor(
 - Feature scaling cached for efficiency
 - Input validation prevents runtime errors
 
-## ðŸ› ï¸ Troubleshooting
+## Troubleshooting
 
 ### **Common Issues**
 
 **"Model artifacts not found"**
 ```bash
 # Solution: Run training first
-python train_model.py
+python src/train_model.py
 ```
 
-**"Low RÂ² performance"**
+**"Low R^2 performance"**
 - Check data quality in `nox_data.xlsx`
 - Verify feature ranges are realistic
 - Increase `n_estimators` in training
@@ -197,7 +200,7 @@ python train_model.py
 pip install -r requirements.txt
 ```
 
-## ðŸ“Š Data Analysis Results
+## Data Analysis Results
 
 ### **Top Features by Importance**
 1. **NOx_in_ppm** (0.0352) - Input concentration
@@ -211,7 +214,7 @@ pip install -r requirements.txt
 - **Operating Condition Dependencies**: Engine speed/torque correlation
 - **Control Parameter Impact**: DEF injection rate effectiveness
 
-## ðŸŽ¯ Production Deployment
+## Production Deployment
 
 ### **Integration Options**
 1. **Python API**: Direct integration with existing systems
@@ -220,14 +223,14 @@ pip install -r requirements.txt
 4. **Real-Time Control**: Integration with engine control units
 
 ### **Validation Checklist**
-- [ ] RÂ² Score > 0.85
+- [ ] R^2 Score > 0.85
 - [ ] Cross-validation consistent
 - [ ] Feature importance matches domain knowledge
 - [ ] Prediction time < 100ms
 - [ ] Input validation robust
 - [ ] Error handling comprehensive
 
-## ðŸ“ž Support
+## Support
 
 For technical support or feature requests:
 - Review feature importance analysis in `models/feature_importance.csv`
@@ -237,6 +240,6 @@ For technical support or feature requests:
 
 ---
 
-**ðŸŽ‰ Ready to predict NOx conversion efficiency with confidence!**
+**Ready to predict NOx conversion efficiency with confidence!**
 
 *Built with Python, scikit-learn, and domain expertise in diesel aftertreatment systems.*
